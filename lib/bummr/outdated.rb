@@ -1,5 +1,6 @@
 require 'open3'
 require 'singleton'
+require 'bundler'
 
 module Bummr
   class Outdated
@@ -9,6 +10,7 @@ module Bummr
       results = []
 
       bundle_options =  ""
+      bundle_options << " --parseable" if Gem::Version.new(Bundler::VERSION) >= Gem::Version.new("2")
       bundle_options << " --strict" unless options[:all_gems]
       bundle_options << " --group #{options[:group]}" if options[:group]
       bundle_options << " #{options[:gem]}" if options[:gem]
@@ -28,7 +30,7 @@ module Bummr
     end
 
     def parse_gem_from(line)
-      regex = / \* (.*) \(newest (\d[\d\.]*\d)[,\s] installed (\d[\d\.]*\d)[\),\s]/.match line
+      regex = /(?:\s+\* )?(.*) \(newest (\d[\d\.]*\d)[,\s] installed (\d[\d\.]*\d)[\),\s]/.match line
 
       unless regex.nil?
         { name: regex[1], newest: regex[2], installed: regex[3] }
