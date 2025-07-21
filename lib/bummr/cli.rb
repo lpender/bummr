@@ -8,10 +8,12 @@ module Bummr
     include Bummr::Prompt
     include Bummr::Scm
 
+    # :nocov: internals are tested by spec/check_spec.rb
     desc "check", "Run automated checks to see if bummr can be run"
     def check(fullcheck=true)
       Bummr::Check.instance.check(fullcheck)
     end
+    # :nocov: end
 
     desc "update",
       "Update outdated gems, run tests, bisect if tests fail\n\n" +
@@ -77,13 +79,16 @@ module Bummr
       end
     end
 
+    # :nocov: internals are tested by spec/lib/remover_spec.rb
     desc "remove_commit", "Remove a commit from the history"
     def remove_commit(sha)
-      Bummr::Remover.instance.remove_commit(sha)
+      puts Bummr::Remover.instance.remove_commit(sha)
     end
+    # :nocov: end
 
     private
 
+    # :nocov: This is stubbed out during actual testing because its boilerplate information for the user
     def display_info
       puts "Bummr #{VERSION}"
       puts "To run Bummr, you must:"
@@ -92,7 +97,7 @@ module Bummr
       puts "- Have a 'log' directory, where we can place logs"
       puts "- Have your build configured to fail fast (recommended)"
       puts "- Have locked any Gem version that you don't wish to update in your Gemfile"
-      puts "- It is recommended that you lock your versions of `ruby` and `rails` in your `Gemfile`"
+      puts "- It is recommended that you lock your versions of 'ruby' and 'rails' in your 'Gemfile'"
       puts "\n"
       puts "Your test command is: " + "'#{TEST_COMMAND}'".color(:yellow)
       puts "\n"
@@ -106,7 +111,8 @@ module Bummr
         puts "--#{key.color(:yellow)}: #{value}"
       end
 
-      puts "\nRun `#{"bummr help update".color(:yellow)}` for more information.\n\n"
+      puts "\nRun '#{"bummr help update".color(:yellow)}' for more information.\n\n"
     end
+    # :nocov: end
   end
 end

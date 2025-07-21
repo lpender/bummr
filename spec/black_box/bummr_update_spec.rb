@@ -2,6 +2,10 @@ require "spec_helper"
 require "jet_black"
 
 describe "bummr update command" do
+  before(:all) do
+    puts "\n<< black_box/bummr_update_spec >>\n"
+  end
+
   let(:session) { JetBlack::Session.new(options: { clean_bundler_env: true }) }
   let(:bummr_gem_path) { File.expand_path("../../", __dir__) }
 

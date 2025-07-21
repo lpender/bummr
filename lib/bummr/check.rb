@@ -27,7 +27,7 @@ module Bummr
     private
 
     def check_base_branch
-      if `git rev-parse --abbrev-ref HEAD` == "#{BASE_BRANCH}\n"
+      if %x{git rev-parse --abbrev-ref HEAD} == "#{BASE_BRANCH}\n"
         message = "Bummr is not meant to be run on your base branch"
         puts message.color(:red)
         puts "Please checkout a branch with 'git checkout -b update-gems'"
@@ -44,7 +44,7 @@ module Bummr
     end
 
     def check_status
-      status = `git status`
+      status = %x{git status}
 
       if status.index 'are currently'
         message = ""
@@ -55,15 +55,15 @@ module Bummr
           message += "You are already bisecting. "
         end
 
-        message += "Make sure `git status` is clean"
+        message += "Make sure 'git status' is clean"
         puts message.color(:red)
         @errors.push message
       end
     end
 
     def check_diff
-      unless `git diff #{BASE_BRANCH}`.empty?
-        message = "Please make sure that `git diff #{BASE_BRANCH}` returns empty"
+      unless %x{git diff #{BASE_BRANCH}}.empty?
+        message = "Please make sure that 'git diff #{BASE_BRANCH}' returns empty"
         puts message.color(:red)
         @errors.push message
       end

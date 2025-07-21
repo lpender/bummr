@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe Bummr::Git do
+  before(:all) do
+    puts "\n<< Bummr::Git >>\n"
+  end
+
   describe "#add" do
     it "stages specified files with git" do
       git = stub_git

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Bummr::CLI do
+  before(:all) do
+    puts "\n<< Bummr::CLI >>\n"
+  end
+
   # https://github.com/wireframe/gitx/blob/171da367072b0e82d5906d1e5b3f8ff38e5774e7/spec/thegarage/gitx/cli/release_command_spec.rb#L9
   let(:args) { [] }
   let(:options) { {} }
@@ -18,6 +22,7 @@ describe Bummr::CLI do
   describe "#update" do
     context "when user rejects moving forward" do
       it "does not attempt to move forward" do
+        expect(cli).to receive(:display_info) # NOOP this function call
         expect(cli).to receive(:yes?).and_return(false)
         expect(cli).not_to receive(:check)
 

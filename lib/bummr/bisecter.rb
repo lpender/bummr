@@ -20,7 +20,7 @@ module Bummr
           end
 
           if line == "bisect run success\n"
-            Bummr::Remover.instance.remove_commit(sha)
+            puts Bummr::Remover.instance.remove_commit(sha)
           end
         end
       end

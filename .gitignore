@@ -2,6 +2,7 @@
 /.yardoc
 /_yardoc/
 /coverage/
+/log/
 /doc/
 /pkg/
 /spec/reports/
@@ -10,4 +11,7 @@
 *.so
 *.o
 *.a
+*.swp
 mkmf.log
+bummr-*.gem
+.DS_Store

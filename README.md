@@ -99,6 +99,12 @@ Update gemname from 0.0.1 to 0.0.2
 - Once the build passes, you can push your branch and create a pull-request!
 - You may wish to `tail -f log/bummr.log` in a separate terminal window so you
   can see which commits are being removed.
+- Environment variables that adjust bummr behavior
+  - BUMMR_TEST = your app's testing suite command (default: `bundle exec rake`)
+  - BASE_BRANCH = your repo's primary branch (default: `main`)
+  - BUMMR_HEADLESS = skip interactive rebase after all updates are complete (default: `false`)
+  - BUMMR_GIT_COMMIT = the shell git commit command to be used (default: `git commit`)
+
 
 ## License
 

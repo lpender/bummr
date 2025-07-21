@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Bummr::Check do
+  before(:all) do
+    puts "\n<< Bummr::Check >>\n"
+  end
+
   let(:check) { Bummr::Check.instance }
 
   before(:each) do
@@ -81,7 +85,7 @@ describe Bummr::Check do
           check.check
 
           expect(check).to have_received(:puts)
-            .with("You are already bisecting. Make sure `git status` is clean".color(:red))
+            .with("You are already bisecting. Make sure 'git status' is clean".color(:red))
           expect(check).to have_received(:yes?)
           expect(check).to have_received(:exit).with(0)
         end
@@ -98,7 +102,7 @@ describe Bummr::Check do
           check.check
 
           expect(check).to have_received(:puts)
-            .with("You are already rebasing. Make sure `git status` is clean".color(:red))
+            .with("You are already rebasing. Make sure 'git status' is clean".color(:red))
           expect(check).to have_received(:yes?)
           expect(check).to have_received(:exit).with(0)
         end
@@ -116,7 +120,7 @@ describe Bummr::Check do
         check.check(true)
 
         expect(check).to have_received(:puts)
-          .with("Please make sure that `git diff main` returns empty".color(:red))
+          .with("Please make sure that 'git diff main' returns empty".color(:red))
         expect(check).to have_received(:yes?)
         expect(check).to have_received(:exit).with(0)
       end

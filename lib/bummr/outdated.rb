@@ -17,7 +17,7 @@ module Bummr
 
       Open3.popen2("bundle outdated" + bundle_options) do |_std_in, std_out|
         while line = std_out.gets
-          puts line
+          puts line # TODO: remove this if possible (pointless for spec tests)
           gem = parse_gem_from(line)
 
           if gem && (options[:all_gems] || gemfile_contains(gem[:name]))
@@ -43,8 +43,11 @@ module Bummr
       /gem ['"]#{gem_name}['"]/.match gemfile
     end
 
+    # :nocov: no need to test whether linux "cat Gemfile" works
     def gemfile
-      @gemfile ||= `cat Gemfile`
+      @gemfile ||= %x{cat Gemfile}
     end
+    # :nocov: end
+
   end
 end

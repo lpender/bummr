@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Bummr::Bisecter do
+  before(:all) do
+    puts "\n<< Bummr::Bisecter >>\n"
+  end
+
   let(:std_out_err_bad_commit) {
     output = String.new
     output += "mybadcommit is the first bad commit\n"

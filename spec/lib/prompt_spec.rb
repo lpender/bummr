@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe Bummr::Prompt do
+  before(:all) do
+    puts "\n<< Bummr::Prompt >>\n"
+  end
+
   let(:parent_class) do
     Class.new do
       def yes?(message)

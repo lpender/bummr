@@ -1,16 +1,20 @@
 require "spec_helper"
 
 describe Bummr::Log do
+  before(:all) do
+    puts "\n<< Bummr::Log >>\n"
+  end
+
   let(:object) { Object.new }
   let(:message) { "test message" }
 
   before do
-    `mkdir -p log`
+    %x{mkdir -p log}
     object.extend(Bummr::Log)
   end
 
   after do
-    `rm log/bummr.log`
+    %x{rm log/bummr.log}
   end
 
   describe "#log" do
@@ -23,9 +27,11 @@ describe Bummr::Log do
     end
 
     it "outputs the message to log/bummr.log" do
+      allow(object).to receive(:puts) # NOOP this function call
+
       object.log message
 
-      result = `cat log/bummr.log`
+      result = %x{cat log/bummr.log}
 
       expect(result).to eq message + "\n"
     end
